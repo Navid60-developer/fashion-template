@@ -27,15 +27,24 @@ Fashion Template is a modern and fully responsive HTML template designed for fas
 
 ```
 📂 fashion-template
-├── 📂 assets
+├── Fashion
+│   ├── 📂 canva_com
 │   ├── 📂 css
 │   ├── 📂 jsss
-│   ├── 📂 images
-├── index.html
-├── about.html
-├── login.html
-├── shop.html
-├── contact.html
+│   ├── 📂 Login
+│   ├── 📂 Shop
+│   ├── 📂 src
+│   ├── 📂 swiper.min.css_5.3.7
+│   ├── 📂 swiper.min.js_5.3.7
+│   ├── AboutUs.html
+│   ├── contact.html
+│   ├── Footert.html
+│   ├── index.html
+│   ├── menuue.html
+│   ├── ScrollPopup.html
+│   ├── swiper.min.css
+│   ├── swiper.min.js
+│   ├── toppe.html
 ├── README.md
 ```
 
