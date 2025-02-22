@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <script src="jsss/main.js" defer></script>
+    <style>
+    
+
+body {
+    background-color: #f4f4f4;
+    
+    text-align: right;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.title-section h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.title-section p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.content-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.image-section{
+    margin: auto;
+}
+.image-section img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.image-section img:hover {
+    transform: scale(1.05);
+}
+
+.text-section {
+    margin: 50px auto;
+    flex: 1;
+}
+
+.text-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.text-section p {
+    text-align: justify ;
+    font-size: 16px;
+    line-height: 1.6;
+    margin:20px auto;
+    
+}
+
+.learn-more {
+    padding: 10px 20px;
+    background-color: #2575fc;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.learn-more:hover {
+    background-color: #6a11cb;
+}
+.H2TeamAbout{
+    margin: 20px auto 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight:900;
+}
+.PTeamAbout{
+    margin: 5px auto;
+    text-align: center;
+    font-size: 20px;
+    font-weight:600;
+    color: #f3c6c6;
+}
+    </style>
+</head>
+<body>
+    <header></header>
+    <section class="about-section">
+        <div class="container ">
+            <div class="title-section">
+                <h1>About Us</h1>
+                <p>We are trying to provide you with the best service.</p>
+            </div>
+            <div class="content-section">
+                
+                <div class="image-section">
+                    <img src="src/img/team1.jpg" alt="Our Team team1">
+                    <h2 class="H2TeamAbout">John Doe</h2>
+                    <p class="PTeamAbout">CEO & Founder</p>
+                </div>
+                <div class="image-section">
+                    <img src="src/img/team2.jpg" alt="Our Team team2">
+                    <h2 class="H2TeamAbout">Jane Smith</h2>
+                    <p class="PTeamAbout">Chief Marketing Officer</p>
+                </div>
+                <div class="image-section">
+                    <img src="src/img/team3.jpg" alt="Our Team team3">
+                    <h2 class="H2TeamAbout">Mike Johnson</h2>
+                    <p class="PTeamAbout">Chief Technology Officer</p>
+                </div>               
+            </div>
+            <div class="text-section">
+                <h2>Our team</h2>
+                <p>
+                    Our team consists of experienced professionals in various fields, whose aim is to provide you with the best services.<br>
+                    We believe that your success is our success.
+                </p>
+                <button class="learn-more">Learn more</button>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</body>
+</html>

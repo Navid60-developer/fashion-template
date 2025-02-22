@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Popup</title>
+    <style>
+        /* Popup styling */
+        #popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        /* Close button styling */
+        #popup .close {
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Content to scroll -->
+    <div style="height: 1500px;">
+        <h1>Scroll Down and Up to See the Popup</h1>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup">
+        <button class="close" onclick="closePopup()">X</button>
+        <p>You're back to scrolling down!</p>
+    </div>
+
+    <script>
+        let lastScrollTop = 0;
+        const popup = document.getElementById("popup");
+
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Check if scrolling back down
+            if (scrollTop > lastScrollTop) {
+                // Show popup if scrolling down
+                popup.style.display = "block";
+            } else {
+                // Hide popup if scrolling up
+                popup.style.display = "none";
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        });
+
+        function closePopup() {
+            popup.style.display = "none";
+        }
+    </script>
+
+</body>
+
+</html>
