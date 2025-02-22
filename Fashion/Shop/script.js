@@ -29,5 +29,5 @@ function includeHTML(el, file) {
 document.addEventListener("DOMContentLoaded", function () {
     includeHTML(document.querySelector("head"), "/fashion-template/Fashion/toppe.html");
     includeHTML(document.querySelector("header"), "/fashion-template/Fashion/menuue.html");
-    includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/footert.html");
+    includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/Footert.html");
 });
