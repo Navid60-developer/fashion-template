@@ -29,7 +29,7 @@ Fashion Template is a modern and fully responsive HTML template designed for fas
 📂 fashion-template
 ├── 📂 assets
 │   ├── 📂 css
-│   ├── 📂 js
+│   ├── 📂 jsss
 │   ├── 📂 images
 ├── index.html
 ├── about.html
@@ -56,5 +56,3 @@ This project is open-source and available under the **MIT License**.
 ---
 
 🚀 **Developed by [NavidTaj]**
-
-ببین من
