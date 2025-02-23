@@ -1,7 +1,7 @@
 [build]
   base = "/fashion-template"
-  publish = "fashion-template"
+  publish = "fashion-template/Fashion"
   command = ""
 
 [functions]
-  directory = "fashion-template/netlify/functions"
+  directory = "fashion-template/Fashion/netlify/functions"
