@@ -200,21 +200,29 @@ function includeHTML(el, file) {
         .catch(err => console.error('Error loading file:', err));
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
-    // let basePath = window.location.origin.includes("github.io") ? "/fashion-template/Fashion/" : "/Fashion/";
-    // let basePath = window.location.hostname.includes("github.io") ? "/fashion-template/Fashion/" : "/";
+// document.addEventListener("DOMContentLoaded", function () {
+//     // let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
+//     // let basePath = window.location.origin.includes("github.io") ? "/fashion-template/Fashion/" : "/Fashion/";
+//     // let basePath = window.location.hostname.includes("github.io") ? "/fashion-template/Fashion/" : "/";
 
-    // includeHTML(document.querySelector("head"), basePath + "toppe.html");
-    // includeHTML(document.querySelector("header"), basePath + "menuue.html");
-    // includeHTML(document.querySelector("footer"), basePath + "Footert.html");
+//     // includeHTML(document.querySelector("head"), basePath + "toppe.html");
+//     // includeHTML(document.querySelector("header"), basePath + "menuue.html");
+//     // includeHTML(document.querySelector("footer"), basePath + "Footert.html");
     
-    // includeHTML(document.querySelector("head"), "/fashion-template/Fashion/toppe.html");
-    // includeHTML(document.querySelector("header"), "/fashion-template/Fashion/menuue.html");
-    // includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/Footert.html");
-    includeHTML(document.querySelector("header"), location.origin + "/toppe.html");
-    includeHTML(document.querySelector("header"), location.origin + "/menuue.html");
-    includeHTML(document.querySelector("header"), location.origin + "/Footert.html");
+//     // includeHTML(document.querySelector("head"), "/fashion-template/Fashion/toppe.html");
+//     // includeHTML(document.querySelector("header"), "/fashion-template/Fashion/menuue.html");
+//     // includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/Footert.html");
+//     includeHTML(document.querySelector("header"), location.origin + "/toppe.html");
+//     includeHTML(document.querySelector("header"), location.origin + "/menuue.html");
+//     includeHTML(document.querySelector("header"), location.origin + "/Footert.html");
+document.addEventListener("DOMContentLoaded", function () {
+    let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
+
+    includeHTML(document.querySelector("head"), basePath + "toppe.html");
+    includeHTML(document.querySelector("header"), basePath + "menuue.html");
+    includeHTML(document.querySelector("footer"), basePath + "Footert.html");
+});
+
 
 
     // استفاده از MutationObserver برای ثبت دکمه‌ها
