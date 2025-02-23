@@ -201,9 +201,9 @@ function includeHTML(el, file) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    includeHTML(document.querySelector("head"), "./Fashion/toppe.html");
-    includeHTML(document.querySelector("header"), "./Fashion/menuue.html");
-    includeHTML(document.querySelector("footer"), "./Fashion/Footert.html");
+    includeHTML(document.querySelector("head"), "/Fashion/toppe.html");
+    includeHTML(document.querySelector("header"), "/Fashion/menuue.html");
+    includeHTML(document.querySelector("footer"), "/Fashion/Footert.html");
 
     // استفاده از MutationObserver برای ثبت دکمه‌ها
     const observer = new MutationObserver(function (mutations) {
