@@ -202,7 +202,7 @@ function includeHTML(el, file) {
 
 document.addEventListener("DOMContentLoaded", function () {
     // let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
-    let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/" ;
+    let basePath = window.location.origin.includes("github.io") ? "/fashion-template/Fashion/" : "/Fashion/";
 
 
     includeHTML(document.querySelector("head"), basePath + "toppe.html");
