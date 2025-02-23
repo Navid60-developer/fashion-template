@@ -1,30 +1,65 @@
 <head>
     <meta charset="utf-8">
-    <script>
+<script>
     var basePath = window.location.hostname.includes("github.io") 
         ? "/fashion-template/Fashion/"  
         : "/";
 
-    document.write('<link rel="stylesheet" href="' + basePath + 'css/fontawesome/css/font-awesome.min.css">');
-    document.write('<link rel="stylesheet" href="' + basePath + 'css/bootstrap.min.css">');
-    document.write('<link rel="stylesheet" href="' + basePath + 'css/style.css">');
-    document.write('<link rel="stylesheet" href="' + basePath + 'css/swiper.min.css">');
+    document.addEventListener("DOMContentLoaded", function() {
+        var links = [
+            { id: "fontawesome-css", href: "css/fontawesome/css/font-awesome.min.css" },
+            { id: "bootstrap-css", href: "css/bootstrap.min.css" },
+            { id: "style-css", href: "css/style.css" },
+            { id: "swiper-css", href: "css/swiper.min.css" }
+        ];
 
-    document.write('<script src="' + basePath + 'jsss/jquery.slim.min.js"><\/script>');
-    document.write('<script src="' + basePath + 'jsss/popper.min.js"><\/script>');
-    document.write('<script src="' + basePath + 'jsss/bootstrap.bundle.min.js"><\/script>');
-    document.write('<script src="' + basePath + 'jsss/nbd.js"><\/script>');
+        var scripts = [
+            { id: "jquery-js", src: "jsss/jquery.slim.min.js" },
+            { id: "popper-js", src: "jsss/popper.min.js" },
+            { id: "bootstrap-js", src: "jsss/bootstrap.bundle.min.js" },
+            { id: "nbd-js", src: "jsss/nbd.js" }
+        ];
+
+        // افزودن لینک‌های CSS
+        links.forEach(function(link) {
+            var el = document.createElement("link");
+            el.rel = "stylesheet";
+            el.href = basePath + link.href;
+            el.id = link.id;
+            document.head.appendChild(el);
+        });
+
+        // افزودن اسکریپت‌های JS
+        scripts.forEach(function(script) {
+            var el = document.createElement("script");
+            el.src = basePath + script.src;
+            el.id = script.id;
+            el.defer = true; // بهینه‌سازی بارگذاری اسکریپت‌ها
+            document.body.appendChild(el);
+        });
+    });
 </script>
 
-    <title>HTML Theme</title>
 
-<!--     <link rel="stylesheet" href="/fashion-template/Fashion/css/fontawesome/css/font-awesome.min.css">
+
+    <title>HTML Theme</title>
+     <link rel="stylesheet" id="font-awesome.min.css" >
+    <link rel="stylesheet" id="bootstrap.min.css" >
+    <link rel="stylesheet" id="style.css" >
+    <link rel="stylesheet" id="swiper.min.css" >
+
+    <script id="jquery.slim.min.js" ></script>
+    <script id="popper.min.js" ></script>
+    <script id="bootstrap.bundle.min.js" ></script
+   <script id="nbd.js" ></script>
+
+<!--      <link rel="stylesheet" href="/fashion-template/Fashion/css/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/fashion-template/Fashion/css/bootstrap.min.css">
     <link rel="stylesheet" href="/fashion-template/Fashion/css/style.css">
     <link rel="stylesheet" href="/fashion-template/Fashion/css/swiper.min.css">
 
     <script src="/fashion-template/Fashion/jsss/jquery.slim.min.js"></script>
     <script src="/fashion-template/Fashion/jsss/popper.min.js"></script>
-    <script src="/fashion-template/Fashion/jsss/bootstrap.bundle.min.js"></script> -->   
-<!--     <script src="/fashion-template/Fashion/jsss/nbd.js"></script> -->
+    <script src="/fashion-template/Fashion/jsss/bootstrap.bundle.min.js"></script
+   <script src="/fashion-template/Fashion/jsss/nbd.js"></script>  -->
 </head>
