@@ -216,7 +216,7 @@ function includeHTML(el, file) {
 //     includeHTML(document.querySelector("header"), location.origin + "/menuue.html");
 //     includeHTML(document.querySelector("header"), location.origin + "/Footert.html");
 document.addEventListener("DOMContentLoaded", function () {
-    let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
+    let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/";
 
     includeHTML(document.querySelector("head"), basePath + "toppe.html");
     includeHTML(document.querySelector("header"), basePath + "menuue.html");
