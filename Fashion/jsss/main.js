@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     includeHTML(document.querySelector("head"), basePath + "toppe.html");
     includeHTML(document.querySelector("header"), basePath + "menuue.html");
     includeHTML(document.querySelector("footer"), basePath + "Footert.html");
-});
+
 
 
 
