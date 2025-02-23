@@ -175,55 +175,55 @@ function handleCancelButtonClick() {
 }
 
 // تابع برای بارگذاری فایل‌های HTML
-function includeHTML(el, file) {
-    fetch(file)
-        .then(response => response.text())
-        .then(data => {
-            if (el.tagName.toLowerCase() === "head") {
-                const headContent = document.createElement('div');
-                headContent.innerHTML = data;
+// function includeHTML(el, file) {
+//     fetch(file)
+//         .then(response => response.text())
+//         .then(data => {
+//             if (el.tagName.toLowerCase() === "head") {
+//                 const headContent = document.createElement('div');
+//                 headContent.innerHTML = data;
 
-                headContent.querySelectorAll('link').forEach(element => {
-                    document.head.appendChild(element);
-                });
+//                 headContent.querySelectorAll('link').forEach(element => {
+//                     document.head.appendChild(element);
+//                 });
 
-                headContent.querySelectorAll('script').forEach(element => {
-                    const script = document.createElement('script');
-                    script.src = element.src;
-                    script.defer = true;
-                    document.head.appendChild(script);
-                });
-            } else {
-                el.innerHTML = data;
-            }
-        })
-        .catch(err => console.error('Error loading file:', err));
-}
+//                 headContent.querySelectorAll('script').forEach(element => {
+//                     const script = document.createElement('script');
+//                     script.src = element.src;
+//                     script.defer = true;
+//                     document.head.appendChild(script);
+//                 });
+//             } else {
+//                 el.innerHTML = data;
+//             }
+//         })
+//         .catch(err => console.error('Error loading file:', err));
+// }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
-    // let basePath = window.location.origin.includes("github.io") ? "/fashion-template/Fashion/" : "/Fashion/";
-    let basePath = window.location.hostname.includes("github.io") ? "/fashion-template/Fashion/" : "/";
+// document.addEventListener("DOMContentLoaded", function () {
+//     // let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/Fashion/";
+//     // let basePath = window.location.origin.includes("github.io") ? "/fashion-template/Fashion/" : "/Fashion/";
+//     let basePath = window.location.hostname.includes("github.io") ? "/fashion-template/Fashion/" : "/";
 
-    includeHTML(document.querySelector("head"), basePath + "toppe.html");
-    includeHTML(document.querySelector("header"), basePath + "menuue.html");
-    includeHTML(document.querySelector("footer"), basePath + "Footert.html");
+//     includeHTML(document.querySelector("head"), basePath + "toppe.html");
+//     includeHTML(document.querySelector("header"), basePath + "menuue.html");
+//     includeHTML(document.querySelector("footer"), basePath + "Footert.html");
     
-    // includeHTML(document.querySelector("head"), "/fashion-template/Fashion/toppe.html");
-    // includeHTML(document.querySelector("header"), "/fashion-template/Fashion/menuue.html");
-    // includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/Footert.html");
+//     // includeHTML(document.querySelector("head"), "/fashion-template/Fashion/toppe.html");
+//     // includeHTML(document.querySelector("header"), "/fashion-template/Fashion/menuue.html");
+//     // includeHTML(document.querySelector("footer"), "/fashion-template/Fashion/Footert.html");
 
-    // استفاده از MutationObserver برای ثبت دکمه‌ها
-    const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            if (mutation.addedNodes.length) {
-                registerCartButtons();
-            }
-        });
-    });
+//     // استفاده از MutationObserver برای ثبت دکمه‌ها
+//     const observer = new MutationObserver(function (mutations) {
+//         mutations.forEach(function (mutation) {
+//             if (mutation.addedNodes.length) {
+//                 registerCartButtons();
+//             }
+//         });
+//     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+//     observer.observe(document.body, { childList: true, subtree: true });
 
-    // ثبت دکمه‌های اضافه شده در بارگذاری اولیه
-    registerCartButtons();
-});
+//     // ثبت دکمه‌های اضافه شده در بارگذاری اولیه
+//     registerCartButtons();
+// });
