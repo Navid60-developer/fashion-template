@@ -6,39 +6,34 @@
         : "/fashion-template/Fashion/";
 
     document.addEventListener("DOMContentLoaded", function() {
-        var links = [
-            { id: "fontawesome-css", href: basePath + "css/fontawesome/css/font-awesome.min.css" },
-            { id: "bootstrap-css", href: basePath + "css/bootstrap.min.css" },
-            { id: "style-css", href: basePath + "css/style.css" },
-            { id: "swiper-css", href: basePath + "css/swiper.min.css" }
-        ];
+        var links = {
+            "fontawesome-css": basePath + "css/fontawesome/css/font-awesome.min.css",
+            "bootstrap-css": basePath + "css/bootstrap.min.css",
+            "style-css": basePath + "css/style.css",
+            "swiper-css": basePath + "css/swiper.min.css"
+        };
 
-        var scripts = [
-            { id: "jquery-js", src: basePath + "jsss/jquery.slim.min.js" },
-            { id: "popper-js", src: basePath + "jsss/popper.min.js" },
-            { id: "bootstrap-js", src: basePath + "jsss/bootstrap.bundle.min.js" },
-            { id: "nbd-js", src: basePath + "jsss/nbd.js" }
-        ];
+        var scripts = {
+            "jquery-js": basePath + "jsss/jquery.slim.min.js",
+            "popper-js": basePath + "jsss/popper.min.js",
+            "bootstrap-js": basePath + "jsss/bootstrap.bundle.min.js",
+            "nbd-js": basePath + "jsss/nbd.js"
+        };
 
-        // افزودن لینک‌های CSS به head
-        links.forEach(function(link) {
-            var el = document.createElement("link");
-            el.rel = "stylesheet";
-            el.href = link.href;
-            el.id = link.id;
-            document.head.appendChild(el);
+        // مقداردهی `href` برای تگ‌های لینک
+        Object.keys(links).forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.href = links[id];
         });
 
-        // افزودن اسکریپت‌های JS به body
-        scripts.forEach(function(script) {
-            var el = document.createElement("script");
-            el.src = script.src;
-            el.id = script.id;
-            el.defer = true; 
-            document.body.appendChild(el);
+        // مقداردهی `src` برای تگ‌های اسکریپت
+        Object.keys(scripts).forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.src = scripts[id];
         });
     });
 </script>
+
 
 
 
