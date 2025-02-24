@@ -1,53 +1,45 @@
 <head>
     <meta charset="utf-8">
-<script>
-    var basePath = window.location.hostname.includes("github.io") 
-        ? "/fashion-template/Fashion/"  
-        : "/fashion-template/Fashion/";
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion template</title>
 
-    document.addEventListener("DOMContentLoaded", function() {
-        var links = {
-            "fontawesome-css": basePath + "css/fontawesome/css/font-awesome.min.css",
-            "bootstrap-css": basePath + "css/bootstrap.min.css",
-            "style-css": basePath + "css/style.css",
-            "swiper-css": basePath + "css/swiper.min.css"
-        };
+    <script>
+        var basePath = window.location.hostname.includes("github.io") 
+            ? "/fashion-template/Fashion/"  
+            : "/fashion-template/Fashion/";
 
-        var scripts = {
-            "jquery-js": basePath + "jsss/jquery.slim.min.js",
-            "popper-js": basePath + "jsss/popper.min.js",
-            "bootstrap-js": basePath + "jsss/bootstrap.bundle.min.js",
-            "nbd-js": basePath + "jsss/nbd.js"
-        };
+        document.addEventListener("DOMContentLoaded", function() {
+            var links = [
+                "css/fontawesome/css/font-awesome.min.css",
+                "css/bootstrap.min.css",
+                "css/style.css",
+                "css/swiper.min.css"
+            ];
 
-        // مقداردهی `href` برای تگ‌های لینک
-        Object.keys(links).forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) el.href = links[id];
+            var scripts = [
+                "jsss/jquery.slim.min.js",
+                "jsss/popper.min.js",
+                "jsss/bootstrap.bundle.min.js",
+                "jsss/nbd.js"
+            ];
+
+            // افزودن لینک‌های CSS
+            links.forEach(function(href) {
+                var link = document.createElement("link");
+                link.rel = "stylesheet";
+                link.href = basePath + href;
+                document.head.appendChild(link);
+            });
+
+            // افزودن اسکریپت‌های JS
+            scripts.forEach(function(src) {
+                var script = document.createElement("script");
+                script.src = basePath + src;
+                script.defer = true;
+                document.body.appendChild(script);
+            });
         });
-
-        // مقداردهی `src` برای تگ‌های اسکریپت
-        Object.keys(scripts).forEach(function(id) {
-            var el = document.getElementById(id);
-            if (el) el.src = scripts[id];
-        });
-    });
-</script>
-
-
-
-
-
-    <title>HTML Theme</title>
-     <link rel="stylesheet" id="fontawesome-css" >
-    <link rel="stylesheet" id="bootstrap-css" >
-    <link rel="stylesheet" id="style-css" >
-    <link rel="stylesheet" id="swiper-css" >
-
-    <script id="jquery-js" ></script>
-    <script id="popper-js" ></script>
-    <script id="bootstrap-js" ></script
-   <script id="nbd-js" ></script>
+    </script>
 
 <!--      <link rel="stylesheet" href="/fashion-template/Fashion/css/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/fashion-template/Fashion/css/bootstrap.min.css">
