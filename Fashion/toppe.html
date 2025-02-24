@@ -3,42 +3,43 @@
 <script>
     var basePath = window.location.hostname.includes("github.io") 
         ? "/fashion-template/Fashion/"  
-        : "/";
+        : "/fashion-template/Fashion/";
 
     document.addEventListener("DOMContentLoaded", function() {
         var links = [
-            { id: "fontawesome-css", href: "css/fontawesome/css/font-awesome.min.css" },
-            { id: "bootstrap-css", href: "css/bootstrap.min.css" },
-            { id: "style-css", href: "css/style.css" },
-            { id: "swiper-css", href: "css/swiper.min.css" }
+            { id: "fontawesome-css", href: basePath + "css/fontawesome/css/font-awesome.min.css" },
+            { id: "bootstrap-css", href: basePath + "css/bootstrap.min.css" },
+            { id: "style-css", href: basePath + "css/style.css" },
+            { id: "swiper-css", href: basePath + "css/swiper.min.css" }
         ];
 
         var scripts = [
-            { id: "jquery-js", src: "jsss/jquery.slim.min.js" },
-            { id: "popper-js", src: "jsss/popper.min.js" },
-            { id: "bootstrap-js", src: "jsss/bootstrap.bundle.min.js" },
-            { id: "nbd-js", src: "jsss/nbd.js" }
+            { id: "jquery-js", src: basePath + "jsss/jquery.slim.min.js" },
+            { id: "popper-js", src: basePath + "jsss/popper.min.js" },
+            { id: "bootstrap-js", src: basePath + "jsss/bootstrap.bundle.min.js" },
+            { id: "nbd-js", src: basePath + "jsss/nbd.js" }
         ];
 
-        // افزودن لینک‌های CSS
+        // افزودن لینک‌های CSS به head
         links.forEach(function(link) {
             var el = document.createElement("link");
             el.rel = "stylesheet";
-            el.href = basePath + link.href;
+            el.href = link.href;
             el.id = link.id;
             document.head.appendChild(el);
         });
 
-        // افزودن اسکریپت‌های JS
+        // افزودن اسکریپت‌های JS به body
         scripts.forEach(function(script) {
             var el = document.createElement("script");
-            el.src = basePath + script.src;
+            el.src = script.src;
             el.id = script.id;
-            el.defer = true; // بهینه‌سازی بارگذاری اسکریپت‌ها
+            el.defer = true; 
             document.body.appendChild(el);
         });
     });
 </script>
+
 
 
 
