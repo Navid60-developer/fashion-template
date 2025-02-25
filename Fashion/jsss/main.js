@@ -15,65 +15,43 @@ function addProductToCart(productName, productPrice) {
         cart.push({ name: productName, price: productPrice, quantity: 1 });
     }
     updateCartDisplay();
+    console.log('Cart updated:', cart);
 }
 
 // تابع برای به‌روزرسانی نمایش سبد خرید
 function updateCartDisplay() {
     let itemCountElement = document.querySelector('.item-count');
     let totalPriceElement = document.querySelector('.total-price');
+    if (!itemCountElement || !totalPriceElement) {
+        console.error('Cart display elements not found');
+        return;
+    }
+    
     let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     let totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
     itemCountElement.innerText = totalItems;
     totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
-
-    // تنظیم استایل برای تعداد و قیمت
-    if (totalItems > 0) {
-        itemCountElement.style.backgroundColor = 'red';
-        totalPriceElement.style.backgroundColor = 'red';
-        itemCountElement.style.color = 'white';
-        totalPriceElement.style.color = 'white';
-    } else {
-        itemCountElement.style.backgroundColor = '';
-        totalPriceElement.style.backgroundColor = '';
-        itemCountElement.style.color = '';
-        totalPriceElement.style.color = '';
-    }
 }
 
 // تابع برای افزایش یا کاهش تعداد محصول
 function modifyProductQuantity(productName, action) {
     let product = cart.find(item => item.name === productName);
-    if (product) {
-        if (action === 'increase') {
-            product.quantity += 1;
-        } else if (action === 'decrease' && product.quantity > 0) {
-            product.quantity -= 1;
-            if (product.quantity === 0) {
-                cart = cart.filter(item => item.name !== productName);
-            }
-        }
-        updateCartDisplay();
+    if (!product) {
+        console.error('Product not found in cart:', productName);
+        return;
     }
-}
 
-// تابع برای باز کردن پنجره انتخاب محصول
-function openProductSelectionModal(action) {
-    let productSelect = document.getElementById('productSelect');
-    productSelect.innerHTML = '';
-    cart.forEach(product => {
-        let option = document.createElement('option');
-        option.value = product.name;
-        option.textContent = `${product.name} - $${product.price.toFixed(2)}`;
-        productSelect.appendChild(option);
-    });
-    document.getElementById('productModal').setAttribute('data-action', action);
-    document.getElementById('productModal').style.display = 'flex'; // نمایش مدال
-}
-
-// تابع برای بستن پنجره انتخاب محصول
-function closeProductSelectionModal() {
-    document.getElementById('productModal').style.display = 'none'; // مخفی کردن مدال
+    if (action === 'increase') {
+        product.quantity += 1;
+    } else if (action === 'decrease' && product.quantity > 0) {
+        product.quantity -= 1;
+        if (product.quantity === 0) {
+            cart = cart.filter(item => item.name !== productName);
+        }
+    }
+    updateCartDisplay();
+    console.log('Cart modified:', cart);
 }
 
 // تابع برای مدیریت کلیک دکمه "Add to Cart"
@@ -82,12 +60,10 @@ function handleAddToCartClick(event) {
     const productName = button.getAttribute('data-product-name');
     let productPrice = parseFloat(button.getAttribute('data-product-price'));
 
-    // لاگ برای دیباگ
     console.log('Product Name:', productName);
     console.log('Raw Price:', button.getAttribute('data-product-price'));
     console.log('Parsed Price:', productPrice);
 
-    // اعتبارسنجی مقدار قیمت
     if (isNaN(productPrice)) {
         console.error('Invalid product price:', button.getAttribute('data-product-price'));
         return;
@@ -102,77 +78,47 @@ function registerCartButtons() {
         button.removeEventListener('click', handleAddToCartClick);
         button.addEventListener('click', handleAddToCartClick);
     });
-
-    const increaseButton = document.querySelector('.cart-increase');
-    const decreaseButton = document.querySelector('.cart-decrease');
-    const clearButton = document.querySelector('.cart-clear');
-    const confirmButton = document.getElementById('confirmSelection');
-    const cancelButton = document.getElementById('cancelSelection');
-
-    if (increaseButton) {
-        increaseButton.removeEventListener('click', handleIncreaseButtonClick);
-        increaseButton.addEventListener('click', handleIncreaseButtonClick);
-    }
-
-    if (decreaseButton) {
-        decreaseButton.removeEventListener('click', handleDecreaseButtonClick);
-        decreaseButton.addEventListener('click', handleDecreaseButtonClick);
-    }
-
-    if (clearButton) {
-        clearButton.removeEventListener('click', handleClearButtonClick);
-        clearButton.addEventListener('click', handleClearButtonClick);
-    }
-
-    if (confirmButton) {
-        confirmButton.removeEventListener('click', handleConfirmButtonClick);
-        confirmButton.addEventListener('click', handleConfirmButtonClick);
-    }
-
-    if (cancelButton) {
-        cancelButton.removeEventListener('click', handleCancelButtonClick);
-        cancelButton.addEventListener('click', handleCancelButtonClick);
-    }
+    console.log('Cart buttons registered');
 }
 
-// تابع برای مدیریت کلیک دکمه افزایش
-function handleIncreaseButtonClick() {
-    if (cart.length > 1) {
-        openProductSelectionModal('increase');
-    } else if (cart.length === 1) {
-        modifyProductQuantity(cart[0].name, 'increase');
+// تابع برای بارگذاری فایل‌های HTML
+function includeHTML(el, file) {
+    if (!el) {
+        console.error('Element not found for including HTML:', file);
+        return;
     }
+    fetch(file)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            el.innerHTML = data;
+        })
+        .catch(err => console.error('Error loading file:', file, err));
 }
 
-// تابع برای مدیریت کلیک دکمه کاهش
-function handleDecreaseButtonClick() {
-    if (cart.length > 1) {
-        openProductSelectionModal('decrease');
-    } else if (cart.length === 1) {
-        modifyProductQuantity(cart[0].name, 'decrease');
-    }
-}
+document.addEventListener("DOMContentLoaded", function () {
+    let basePath = window.location.pathname.includes("/fashion-template/") ? "/fashion-template/Fashion/" : "/";
+    includeHTML(document.querySelector("head"), basePath + "toppe.html");
+    includeHTML(document.querySelector("header"), basePath + "menuue.html");
+    includeHTML(document.querySelector("footer"), basePath + "Footert.html");
 
-// تابع برای مدیریت کلیک دکمه پاک کردن سبد خرید
-function handleClearButtonClick() {
-    cart = []; // سبد خرید را خالی می‌کنیم
-    updateCartDisplay();
-}
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.addedNodes.length) {
+                registerCartButtons();
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-// تابع برای مدیریت کلیک دکمه تایید
-function handleConfirmButtonClick() {
-    const action = document.getElementById('productModal').getAttribute('data-action');
-    const selectedProduct = document.getElementById('productSelect').value;
-    if (selectedProduct) {
-        modifyProductQuantity(selectedProduct, action);
-        closeProductSelectionModal();
-    }
-}
+    registerCartButtons();
+    console.log('Page loaded and cart buttons initialized');
+});
 
-// تابع برای مدیریت کلیک دکمه لغو
-function handleCancelButtonClick() {
-    closeProductSelectionModal();
-}
 
 // تابع برای بارگذاری فایل‌های HTML
 // function includeHTML(el, file) {
