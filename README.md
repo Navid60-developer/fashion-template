@@ -38,13 +38,10 @@ Fashion Template is a modern and fully responsive HTML template designed for fas
 │   ├── 📂 swiper.min.js_5.3.7
 │   ├── AboutUs.html
 │   ├── contact.html
-│   ├── Footert.html
 │   ├── index.html
-│   ├── menuue.html
 │   ├── ScrollPopup.html
 │   ├── swiper.min.css
 │   ├── swiper.min.js
-│   ├── toppe.html
 ├── README.md
 ```
 
@@ -64,4 +61,4 @@ This project is open-source and available under the **MIT License**.
 
 ---
 
-🚀 **Developed by [NavidTaj]**
+🚀 ** Developed by NavidTaj **
