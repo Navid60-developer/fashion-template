@@ -966,7 +966,9 @@ body {
 }
 
 .aboutcontainer {
-    width: 80%;
+    text-align: left;
+    direction: ltr;
+    width: 100%;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
