@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
 // تعریف متغیر سبد خرید
 let cart = [];
 
@@ -6,6 +5,7 @@ let cart = [];
 function addProductToCart(productName, productPrice) {
     if (isNaN(productPrice) || productPrice <= 0) {
         console.error('Invalid product price:', productPrice);
+        console.log(cart);
         return;
     }
 
@@ -174,7 +174,7 @@ function handleConfirmButtonClick() {
 function handleCancelButtonClick() {
     closeProductSelectionModal();
 }
-});
+
 // تابع برای بارگذاری فایل‌های HTML
 // function includeHTML(el, file) {
 //     fetch(file)
