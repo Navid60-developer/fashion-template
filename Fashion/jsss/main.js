@@ -4,8 +4,7 @@ let cart = [];
 // تابع برای اضافه کردن محصول به سبد خرید
 function addProductToCart(productName, productPrice) {
     if (isNaN(productPrice) || productPrice <= 0) {
-        console.error('Invalid product price:', productPrice);
-        console.log(cart);
+        console.error('Invalid product price:', productPrice);        
         return;
     }
 
