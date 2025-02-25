@@ -25,7 +25,7 @@ function updateCartDisplay() {
     let totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
     itemCountElement.innerText = totalItems;
-    totalPriceElement.innerText = $${totalPrice.toFixed(2)};
+    totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
 
     // تنظیم استایل برای تعداد و قیمت
     if (totalItems > 0) {
@@ -64,7 +64,7 @@ function openProductSelectionModal(action) {
     cart.forEach(product => {
         let option = document.createElement('option');
         option.value = product.name;
-        option.textContent = ${product.name} - $${product.price.toFixed(2)};
+        option.textContent = `${product.name} - $${product.price.toFixed(2)}`;
         productSelect.appendChild(option);
     });
     document.getElementById('productModal').setAttribute('data-action', action);
