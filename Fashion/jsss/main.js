@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function() {
 // تعریف متغیر سبد خرید
 let cart = [];
 
@@ -173,7 +174,7 @@ function handleConfirmButtonClick() {
 function handleCancelButtonClick() {
     closeProductSelectionModal();
 }
-
+});
 // تابع برای بارگذاری فایل‌های HTML
 // function includeHTML(el, file) {
 //     fetch(file)
