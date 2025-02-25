@@ -25,7 +25,7 @@ function updateCartDisplay() {
     let totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
     itemCountElement.innerText = totalItems;
-    // totalPriceElement.innerText = $${totalPrice.toFixed(2)};
+    totalPriceElement.innerText = $${totalPrice.toFixed(2)};
 
     // تنظیم استایل برای تعداد و قیمت
     if (totalItems > 0) {
