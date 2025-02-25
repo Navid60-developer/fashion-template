@@ -1,175 +1,111 @@
-// تعریف متغیر سبد خرید
-let cart = [];
+document.addEventListener("DOMContentLoaded", function () {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// تابع برای اضافه کردن محصول به سبد خرید
-function addProductToCart(productName, productPrice) {
-    if (isNaN(productPrice) || productPrice <= 0) {
-        console.error('Invalid product price:', productPrice);        
-        return;
+    function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    let existingProduct = cart.find(item => item.name === productName);
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        cart.push({ name: productName, price: productPrice, quantity: 1 });
+    function updateCartDisplay() {
+        let itemCountElement = document.querySelector(".item-count");
+        let totalPriceElement = document.querySelector(".total-price");
+        let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        let totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+
+        if (itemCountElement) itemCountElement.innerText = totalItems;
+        if (totalPriceElement) totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
+
+        let hasItems = totalItems > 0;
+        if (itemCountElement) itemCountElement.style.cssText = hasItems ? "background:red; color:white" : "";
+        if (totalPriceElement) totalPriceElement.style.cssText = hasItems ? "background:red; color:white" : "";
     }
-    updateCartDisplay();
-}
 
-// تابع برای به‌روزرسانی نمایش سبد خرید
-function updateCartDisplay() {
-    let itemCountElement = document.querySelector('.item-count');
-    let totalPriceElement = document.querySelector('.total-price');
-    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    let totalPrice = cart.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    function addProductToCart(productName, productPrice) {
+        if (isNaN(productPrice) || productPrice <= 0) return console.error("Invalid price:", productPrice);
 
-    itemCountElement.innerText = totalItems;
-    totalPriceElement.innerText = `$${totalPrice.toFixed(2)}`;
+        let existingProduct = cart.find(item => item.name === productName);
+        existingProduct ? existingProduct.quantity++ : cart.push({ name: productName, price: productPrice, quantity: 1 });
 
-    // تنظیم استایل برای تعداد و قیمت
-    if (totalItems > 0) {
-        itemCountElement.style.backgroundColor = 'red';
-        totalPriceElement.style.backgroundColor = 'red';
-        itemCountElement.style.color = 'white';
-        totalPriceElement.style.color = 'white';
-    } else {
-        itemCountElement.style.backgroundColor = '';
-        totalPriceElement.style.backgroundColor = '';
-        itemCountElement.style.color = '';
-        totalPriceElement.style.color = '';
-    }
-}
-
-// تابع برای افزایش یا کاهش تعداد محصول
-function modifyProductQuantity(productName, action) {
-    let product = cart.find(item => item.name === productName);
-    if (product) {
-        if (action === 'increase') {
-            product.quantity += 1;
-        } else if (action === 'decrease' && product.quantity > 0) {
-            product.quantity -= 1;
-            if (product.quantity === 0) {
-                cart = cart.filter(item => item.name !== productName);
-            }
-        }
+        saveCart();
         updateCartDisplay();
     }
-}
 
-// تابع برای باز کردن پنجره انتخاب محصول
-function openProductSelectionModal(action) {
-    let productSelect = document.getElementById('productSelect');
-    productSelect.innerHTML = '';
-    cart.forEach(product => {
-        let option = document.createElement('option');
-        option.value = product.name;
-        option.textContent = `${product.name} - $${product.price.toFixed(2)}`;
-        productSelect.appendChild(option);
+    function modifyProductQuantity(productName, action) {
+        let product = cart.find(item => item.name === productName);
+        if (!product) return;
+
+        if (action === "increase") product.quantity++;
+        else if (action === "decrease" && product.quantity > 0) {
+            product.quantity--;
+            if (product.quantity === 0) cart = cart.filter(item => item.name !== productName);
+        }
+
+        saveCart();
+        updateCartDisplay();
+    }
+
+    function clearCart() {
+        cart = [];
+        saveCart();
+        updateCartDisplay();
+    }
+
+    function openProductSelectionModal(action) {
+        let modal = document.getElementById("productModal");
+        let productSelect = document.getElementById("productSelect");
+        if (!modal || !productSelect) return;
+
+        productSelect.innerHTML = "";
+        cart.forEach(product => {
+            let option = document.createElement("option");
+            option.value = product.name;
+            option.textContent = `${product.name} - $${product.price.toFixed(2)}`;
+            productSelect.appendChild(option);
+        });
+
+        modal.setAttribute("data-action", action);
+        modal.style.display = "flex";
+    }
+
+    function closeProductSelectionModal() {
+        let modal = document.getElementById("productModal");
+        if (modal) modal.style.display = "none";
+    }
+
+    document.body.addEventListener("click", function (event) {
+        let target = event.target;
+
+        if (target.classList.contains("add-to-cart")) {
+            let productName = target.getAttribute("data-product-name");
+            let productPrice = parseFloat(target.getAttribute("data-product-price"));
+            addProductToCart(productName, productPrice);
+        }
+
+        if (target.classList.contains("cart-increase")) {
+            cart.length > 1 ? openProductSelectionModal("increase") : modifyProductQuantity(cart[0].name, "increase");
+        }
+
+        if (target.classList.contains("cart-decrease")) {
+            cart.length > 1 ? openProductSelectionModal("decrease") : modifyProductQuantity(cart[0].name, "decrease");
+        }
+
+        if (target.classList.contains("cart-clear")) {
+            clearCart();
+        }
+
+        if (target.id === "confirmSelection") {
+            let modal = document.getElementById("productModal");
+            let selectedProduct = document.getElementById("productSelect").value;
+            let action = modal ? modal.getAttribute("data-action") : null;
+            if (selectedProduct) {
+                modifyProductQuantity(selectedProduct, action);
+                closeProductSelectionModal();
+            }
+        }
+
+        if (target.id === "cancelSelection") {
+            closeProductSelectionModal();
+        }
     });
-    document.getElementById('productModal').setAttribute('data-action', action);
-    document.getElementById('productModal').style.display = 'flex'; // نمایش مدال
-}
 
-// تابع برای بستن پنجره انتخاب محصول
-function closeProductSelectionModal() {
-    document.getElementById('productModal').style.display = 'none'; // مخفی کردن مدال
-}
-
-// تابع برای مدیریت کلیک دکمه "Add to Cart"
-function handleAddToCartClick(event) {
-    const button = event.target;
-    const productName = button.getAttribute('data-product-name');
-    let productPrice = parseFloat(button.getAttribute('data-product-price'));
-
-    // لاگ برای دیباگ
-    console.log('Product Name:', productName);
-    console.log('Raw Price:', button.getAttribute('data-product-price'));
-    console.log('Parsed Price:', productPrice);
-
-    // اعتبارسنجی مقدار قیمت
-    if (isNaN(productPrice)) {
-        console.error('Invalid product price:', button.getAttribute('data-product-price'));
-        return;
-    }
-
-    addProductToCart(productName, productPrice);
-}
-
-// تابع برای ثبت دکمه‌های "Add to Cart" و سایر دکمه‌ها
-function registerCartButtons() {
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.removeEventListener('click', handleAddToCartClick);
-        button.addEventListener('click', handleAddToCartClick);
-    });
-
-    const increaseButton = document.querySelector('.cart-increase');
-    const decreaseButton = document.querySelector('.cart-decrease');
-    const clearButton = document.querySelector('.cart-clear');
-    const confirmButton = document.getElementById('confirmSelection');
-    const cancelButton = document.getElementById('cancelSelection');
-
-    if (increaseButton) {
-        increaseButton.removeEventListener('click', handleIncreaseButtonClick);
-        increaseButton.addEventListener('click', handleIncreaseButtonClick);
-    }
-
-    if (decreaseButton) {
-        decreaseButton.removeEventListener('click', handleDecreaseButtonClick);
-        decreaseButton.addEventListener('click', handleDecreaseButtonClick);
-    }
-
-    if (clearButton) {
-        clearButton.removeEventListener('click', handleClearButtonClick);
-        clearButton.addEventListener('click', handleClearButtonClick);
-    }
-
-    if (confirmButton) {
-        confirmButton.removeEventListener('click', handleConfirmButtonClick);
-        confirmButton.addEventListener('click', handleConfirmButtonClick);
-    }
-
-    if (cancelButton) {
-        cancelButton.removeEventListener('click', handleCancelButtonClick);
-        cancelButton.addEventListener('click', handleCancelButtonClick);
-    }
-}
-
-// تابع برای مدیریت کلیک دکمه افزایش
-function handleIncreaseButtonClick() {
-    if (cart.length > 1) {
-        openProductSelectionModal('increase');
-    } else if (cart.length === 1) {
-        modifyProductQuantity(cart[0].name, 'increase');
-    }
-}
-
-// تابع برای مدیریت کلیک دکمه کاهش
-function handleDecreaseButtonClick() {
-    if (cart.length > 1) {
-        openProductSelectionModal('decrease');
-    } else if (cart.length === 1) {
-        modifyProductQuantity(cart[0].name, 'decrease');
-    }
-}
-
-// تابع برای مدیریت کلیک دکمه پاک کردن سبد خرید
-function handleClearButtonClick() {
-    cart = []; // سبد خرید را خالی می‌کنیم
     updateCartDisplay();
-}
-
-// تابع برای مدیریت کلیک دکمه تایید
-function handleConfirmButtonClick() {
-    const action = document.getElementById('productModal').getAttribute('data-action');
-    const selectedProduct = document.getElementById('productSelect').value;
-    if (selectedProduct) {
-        modifyProductQuantity(selectedProduct, action);
-        closeProductSelectionModal();
-    }
-}
-
-// تابع برای مدیریت کلیک دکمه لغو
-function handleCancelButtonClick() {
-    closeProductSelectionModal();
-}
+});
